@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+
+{% block head_title %}
+{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+
+
+{% block content %}
+<div class='col-sm-6 col-sm-offset-3'>
+    {% if instance.image %}
+        <img src='{{ instance.image.url }}' class='img-responsive' style="margin:50px 0px" />
+        
+        <form action="#" method="get">
+            <input type="submit" class="btn" value="Objects detection" name="object_detection">
+        </form>
+        
+        <form action="#" method="get">
+            <input type="submit" class="btn" value="Change background" name="change_background">
+        </form>
+
+         <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="cfg_file" >
+            <p> "{{ cfg_filename }}" </p>
+            <input type='submit' class='btn btn-default' value='Choose cfg' name="choose_cfg"/>
+        </form>
+
+         <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="weights_file" >
+            <p> "{{ weights_filename }}" </p>
+            <input type='submit' class='btn btn-default' value='Choose weights' name="choose_weights"/>
+        </form>
+
+         <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="names_file" >
+            <p> "{{ names_filename }}" </p>
+            <input type='submit' class='btn btn-default' value='Choose names' name="choose_names"/>
+        </form>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="background_file" >
+            <p> "{{ background_filename }}" </p>
+            <input type='submit' class='btn btn-default' value='Choose background' name="choose_background"/>
+        </form>
+
+    {% endif %}
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class='col-sm-6 col-sm-offset-3'>
+    {% load static %}
+    <img src={% static "img/a.jpg" %} class='img-responsive' style="margin:50px 0px" />
+
+    <form action="#" method="get">
+        <input type="submit" class="btn" value="Save as" name="save_result">
+    </form>
+
+</div>
+
+{% endblock content %}
