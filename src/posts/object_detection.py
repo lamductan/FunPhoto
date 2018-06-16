@@ -9,7 +9,8 @@ from matplotlib import patches
 from PIL import Image
 import argparse
 
-sys.path.append("/home/lamductan/python/darknet/python")
+from django.conf import settings
+sys.path.append(settings.DARKNET_DIR)
 import darknet as dn
 
 def load_net(cfgPath, weightsPath):
@@ -45,15 +46,3 @@ def get_cmap(n, name='hsv'):
     RGB color; the keyword argument name must be a standard mpl colormap name.'''
     return plt.cm.get_cmap(name, n)
 
-def main(imgPath="/home/lamductan/python/darknet/python/kim-so-hyun.jpg", \
-         cfgPath="/home/lamductan/python/darknet/cfg/yolov3.cfg", \
-         weightsPath="/home/lamductan/python/darknet/weights/yolov3.weights", 
-         metaPath="/home/lamductan/python/darknet/cfg/coco.data", \
-         output='/home/lamductan/FIT/ML/results/image.jpg'):
-    
-    net = dn.load_net(cfgPath.encode("ascii"), weightsPath.encode("ascii"), 0)
-    meta = dn.load_meta(metaPath.encode("ascii"))
-    detect(net, meta, imgPath, output)
-
-if __name__ == "__main__":
-    main()

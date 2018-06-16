@@ -3,7 +3,8 @@ import cv2
 import matplotlib.pyplot as plt
 import sys
 
-sys.path.append("/home/lamductan/python/darknet/python")
+from django.conf import settings
+sys.path.append(settings.DARKNET_DIR)
 import darknet as dn
 
 def maskPerson(img, rects):
@@ -56,19 +57,3 @@ def changeBackground(srcPath, backgroundPath, net, meta, output):
     mask = maskPerson(src, rects)
     changeBackgroundImg = pastePerson(src, mask, background_resize)
     cv2.imwrite(output, changeBackgroundImg)
-
-def main():
-    cfgPath="cfg/yolov3.cfg"
-    weightsPath="weights/yolov3.weights"
-    metaPath="cfg/coco.data"
-    net, meta = loadNet(cfgPath, weightsPath, metaPath)
-    
-    srcPath = "/home/lamductan/python/darknet/python/ksh3.jpg"
-    backgroundPath = "/home/lamductan/python/darknet/python/background.jpg"
-    changeBackgroundImg = changeBackground(srcPath, backgroundPath, net, meta)
-    cv2.imwrite("/home/lamductan/python/darknet/python/results/" + srcPath.split("/")[-1], changeBackgroundImg)
-    cv2.imshow("Ouput", changeBackgroundImg)
-    cv2.waitKey(0)
-
-if __name__ == '__main__':
-    main()
