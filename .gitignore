@@ -1,4 +1,3 @@
 *.weights
-change_background.py
-object_detection.py
+src/*/__pycache__
 
